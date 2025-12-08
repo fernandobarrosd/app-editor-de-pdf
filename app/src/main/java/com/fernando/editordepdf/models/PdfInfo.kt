@@ -1,5 +1,7 @@
 package com.fernando.editordepdf.models
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.fernando.editordepdf.enums.PdfState
 import java.time.LocalDate
 import java.util.UUID
@@ -35,11 +37,11 @@ class PdfInfo {
         this._state = state
     }
 
-    constructor(content: String, createdAt: LocalDate,
-                        isReadOnly: Boolean) {
+    @RequiresApi(Build.VERSION_CODES.O)
+    constructor(content: String, isReadOnly: Boolean) {
         this._id = UUID.randomUUID().toString()
         this._content = content
-        this._createdAt = createdAt
+        this._createdAt = LocalDate.now()
         this._isReadOnly = isReadOnly
         this._state = PdfState.NOT_SAVED
     }

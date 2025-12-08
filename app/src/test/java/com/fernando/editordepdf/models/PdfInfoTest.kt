@@ -13,12 +13,10 @@ class PdfInfoTest {
 
         val pdfInfo = PdfInfo(
             content = "Conteudo teste",
-            createdAt = createdAt,
             isReadOnly = true
         )
 
         assertEquals(pdfInfo.content, "Conteudo teste")
-        assertEquals(pdfInfo.createdAt, createdAt)
         assertEquals(pdfInfo.isReadOnly, true)
         assertEquals(pdfInfo.state, PdfState.NOT_SAVED)
     }
