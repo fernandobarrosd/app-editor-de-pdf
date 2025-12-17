@@ -29,7 +29,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.fernando.editordepdf.ui.routes.PdfsListRoute
+import com.fernando.editordepdf.ui.screens.pdfsListScreen.PdfsListRoute
 import com.fernando.editordepdf.ui.screens.pdfsListScreen.PdfsListScreen
 import com.fernando.editordepdf.ui.theme.EditorDePDFTheme
 import com.fernando.editordepdf.ui.theme.Red500
