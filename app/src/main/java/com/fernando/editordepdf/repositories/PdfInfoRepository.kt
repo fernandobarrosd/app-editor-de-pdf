@@ -4,14 +4,15 @@ import com.fernando.editordepdf.mappers.toEntity
 import com.fernando.editordepdf.mappers.toRoomEntity
 import com.fernando.editordepdf.models.PdfInfo
 import com.fernando.editordepdf.room.daos.PdfInfoDAO
+import jakarta.inject.Inject
 
-class PdfInfoRepository(private val pdfInfoDAO: PdfInfoDAO) {
+class PdfInfoRepository @Inject constructor(private val pdfInfoDAO: PdfInfoDAO) {
     suspend fun savePdfInfo(pdfInfo: PdfInfo) : PdfInfo {
         pdfInfoDAO.save(pdfInfo.toRoomEntity())
         return pdfInfo
     }
 
-    fun findAll() : List<PdfInfo> {
+    suspend fun findAll() : List<PdfInfo> {
         return pdfInfoDAO.findAll()
             .map { pdfInfoEntity -> pdfInfoEntity.toEntity() }
     }

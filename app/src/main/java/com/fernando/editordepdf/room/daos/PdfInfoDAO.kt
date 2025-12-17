@@ -14,7 +14,7 @@ interface PdfInfoDAO {
     fun findById(pdfInfoID: String) : PdfInfoEntity?
 
     @Query("SELECT * FROM pdf_infos")
-    fun findAll() : List<PdfInfoEntity>
+    suspend fun findAll() : List<PdfInfoEntity>
 
     @Query("DELETE FROM pdf_infos WHERE id = :pdfInfoID")
     suspend fun deleteById(pdfInfoID: String)

@@ -1,0 +1,11 @@
+INSERT INTO pdf_infos (id, content, name, created_at, is_read_only, state) VALUES
+('6a1f9c2e-3b4d-4e5f-9a1c-000000000001', 'Conteúdo do PDF 1',  'Pdf 1',  '2024-01-10', 0, 'SAVED'),
+('6a1f9c2e-3b4d-4e5f-9a1c-000000000002', 'Conteúdo do PDF 2',  'Pdf 2',  '2024-01-11', 1, 'NOT_SAVED'),
+('6a1f9c2e-3b4d-4e5f-9a1c-000000000003', 'Conteúdo do PDF 3',  'Pdf 3',  '2024-01-12', 0, 'NOT_SAVED'),
+('6a1f9c2e-3b4d-4e5f-9a1c-000000000004', 'Conteúdo do PDF 4',  'Pdf 4',  '2024-01-13', 0, 'SAVED'),
+('6a1f9c2e-3b4d-4e5f-9a1c-000000000005', 'Conteúdo do PDF 5',  'Pdf 5',  '2024-01-14', 1, 'NOT_SAVED'),
+('6a1f9c2e-3b4d-4e5f-9a1c-000000000006', 'Conteúdo do PDF 6',  'Pdf 6',  '2024-01-15', 0, 'NOT_SAVED'),
+('6a1f9c2e-3b4d-4e5f-9a1c-000000000007', 'Conteúdo do PDF 7',  'Pdf 7',  '2024-01-16', 0, 'SAVED'),
+('6a1f9c2e-3b4d-4e5f-9a1c-000000000008', 'Conteúdo do PDF 8',  'Pdf 8',  '2024-01-17', 1, 'SAVED'),
+('6a1f9c2e-3b4d-4e5f-9a1c-000000000009', 'Conteúdo do PDF 9',  'Pdf 9',  '2024-01-18', 0, 'NOT_SAVED'),
+('6a1f9c2e-3b4d-4e5f-9a1c-000000000010', 'Conteúdo do PDF 10', 'Pdf 10', '2024-01-19', 0, 'SAVED');

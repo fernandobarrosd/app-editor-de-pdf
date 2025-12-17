@@ -12,6 +12,8 @@ data class PdfInfoEntity(
     val id: String,
     val content: String,
 
+    val name: String,
+
     @ColumnInfo(name = "created_at")
     val createdAt: LocalDate,
 

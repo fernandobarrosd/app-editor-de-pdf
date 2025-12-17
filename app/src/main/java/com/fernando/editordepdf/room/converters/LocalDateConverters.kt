@@ -12,7 +12,6 @@ class LocalDateConverters {
         return localDate.toString()
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     @TypeConverter
     fun convertToLocalDate(localDateString: String) : LocalDate {
         return LocalDate.parse(localDateString)

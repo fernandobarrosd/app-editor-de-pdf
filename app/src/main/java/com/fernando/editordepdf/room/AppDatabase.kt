@@ -15,7 +15,7 @@ import com.fernando.editordepdf.room.entities.PdfInfoEntity
 abstract class AppDatabase : RoomDatabase() {
     abstract fun pdfInfoDao() : PdfInfoDAO
 
-    companion object {
+    /*companion object {
         private var INSTANCE : AppDatabase? = null
 
         fun getInstance(context: Context) : AppDatabase {
@@ -32,5 +32,5 @@ abstract class AppDatabase : RoomDatabase() {
             }
             return instance
         }
-    }
+    }*/
 }

@@ -10,7 +10,8 @@ fun PdfInfo.toRoomEntity() : PdfInfoEntity {
         content = content,
         createdAt = createdAt,
         isReadOnly = isReadOnly,
-        state = state
+        state = state,
+        name = name
     )
 }
 
@@ -20,6 +21,7 @@ fun PdfInfoEntity.toEntity() : PdfInfo {
         content = content,
         createdAt = createdAt,
         isReadOnly = isReadOnly,
-        state = state
+        state = state,
+        name = name
     )
 }

@@ -7,15 +7,15 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.fernando.editordepdf.enums.PdfState
 import com.fernando.editordepdf.models.PdfInfo
 import com.fernando.editordepdf.room.AppDatabase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.runTest
 import org.junit.After
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotEquals
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.io.IOException
-import org.junit.Assert.*
 import java.util.UUID
 
 @RunWith(AndroidJUnit4::class)
@@ -34,19 +34,18 @@ class PdfInfoRepositoryTest {
     }
 
     @After
-    @Throws(IOException::class)
     fun closeDb() {
         appDatabase.close()
     }
 
     @Test
     fun shouldSavePdfInfo() {
-        val pdfInfo = PdfInfo(
-            content = "Conteudo teste",
-            isReadOnly = true
-        )
-
-        CoroutineScope(Dispatchers.IO).launch {
+        runTest {
+            val pdfInfo = PdfInfo(
+                content = "Conteudo teste",
+                isReadOnly = true,
+                name = "Pdf test"
+            )
             val pdfInfoSaved = pdfInfoRepository.savePdfInfo(pdfInfo)
             assertEquals(pdfInfoSaved.id, pdfInfo.id)
             assertEquals(pdfInfoSaved.content, pdfInfo.content)
@@ -58,12 +57,13 @@ class PdfInfoRepositoryTest {
 
     @Test
     fun showReturnNotNullPdfInfoWhenCallFindByIdMethod() {
-        val pdfInfo = PdfInfo(
-            content = "Conteudo teste",
-            isReadOnly = true
-        )
+        runTest {
+            val pdfInfo = PdfInfo(
+                content = "Conteudo teste",
+                isReadOnly = true,
+                name = "Pdf test"
+            )
 
-        CoroutineScope(Dispatchers.IO).launch {
             pdfInfoRepository.savePdfInfo(pdfInfo)
             val pdfInfoFind = pdfInfoRepository.findById(pdfInfo.id)
 
@@ -78,7 +78,7 @@ class PdfInfoRepositoryTest {
 
     @Test
     fun showReturnNullPdfInfoWhenCallFindByIdMethod() {
-        CoroutineScope(Dispatchers.IO).launch {
+        runTest {
             val pdfInfoFind = pdfInfoRepository.findById(UUID.randomUUID().toString())
 
             assertNull(pdfInfoFind)
@@ -87,21 +87,24 @@ class PdfInfoRepositoryTest {
 
     @Test
     fun showReturnPdfInfoListWhenCallFindAllMethod() {
-        val pdfs = listOf(
-            PdfInfo(
-                content = "Conteudo teste 1",
-                isReadOnly = true
-            ),
-            PdfInfo(
-                content = "Conteudo teste 3",
-                isReadOnly = true
-            ),
-            PdfInfo(
-                content = "Conteudo teste 2",
-                isReadOnly = true
+        runTest {
+            val pdfs = listOf(
+                PdfInfo(
+                    content = "Conteudo teste 1",
+                    isReadOnly = true,
+                    name = "Pdf test"
+                ),
+                PdfInfo(
+                    content = "Conteudo teste 2",
+                    isReadOnly = true,
+                    name = "Pdf test"
+                ),
+                PdfInfo(
+                    content = "Conteudo teste 3",
+                    isReadOnly = true,
+                    name = "Pdf test"
+                )
             )
-        )
-        CoroutineScope(Dispatchers.IO).launch {
             pdfs.forEach { pdfInfo ->
                 pdfInfoRepository.savePdfInfo(pdfInfo)
             }
@@ -125,12 +128,12 @@ class PdfInfoRepositoryTest {
 
     @Test
     fun shouldReturnPdfInfoUpdatedWhenCallUpdateToSavedMethod() {
-        val pdfInfo = PdfInfo(
-            content = "Conteudo teste 1",
-            isReadOnly = true
-        )
-
-        CoroutineScope(Dispatchers.IO).launch {
+        runTest {
+            val pdfInfo = PdfInfo(
+                content = "Conteudo teste 1",
+                isReadOnly = true,
+                name = "Pdf test"
+            )
             pdfInfoRepository.savePdfInfo(pdfInfo)
             val pdfInfoUpdated = pdfInfoRepository.updateToSaved(pdfInfo.id)
 
@@ -142,7 +145,7 @@ class PdfInfoRepositoryTest {
 
     @Test
     fun shouldReturnNullIfPdfIsNotExistsWhenCallUpdateToSavedMethod() {
-        CoroutineScope(Dispatchers.IO).launch {
+        runTest {
             val pdfInfoUpdated = pdfInfoRepository.updateToSaved(UUID.randomUUID().toString())
             assertNull(pdfInfoUpdated)
         }
@@ -150,11 +153,12 @@ class PdfInfoRepositoryTest {
 
     @Test
     fun shouldDeletePdfWhenCallDeletePdfInfoByIdMethod() {
-        val pdfInfo = PdfInfo(
-            content = "Conteudo teste 1",
-            isReadOnly = true
-        )
-        CoroutineScope(Dispatchers.IO).launch {
+        runTest {
+            val pdfInfo = PdfInfo(
+                content = "Conteudo teste 1",
+                isReadOnly = true,
+                name = "Pdf test"
+            )
             pdfInfoRepository.savePdfInfo(pdfInfo)
             pdfInfoRepository.deletePdfInfoById(pdfInfo.id)
 

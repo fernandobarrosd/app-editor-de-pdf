@@ -9,16 +9,16 @@ import java.util.UUID
 class PdfInfoTest {
     @Test
     fun shouldCreatePdfInfoWithoutId() {
-        val createdAt = LocalDate.now()
-
         val pdfInfo = PdfInfo(
             content = "Conteudo teste",
-            isReadOnly = true
+            isReadOnly = true,
+            name = "Pdf test"
         )
 
         assertEquals(pdfInfo.content, "Conteudo teste")
         assertEquals(pdfInfo.isReadOnly, true)
         assertEquals(pdfInfo.state, PdfState.NOT_SAVED)
+        assertEquals(pdfInfo.name, "Pdf test")
     }
 
     @Test
@@ -32,6 +32,7 @@ class PdfInfoTest {
             createdAt = createdAt,
             isReadOnly = true,
             state = PdfState.SAVED,
+            name = "Pdf test"
         )
 
         assertEquals(pdfInfo.id, pdfInfoID)
@@ -39,27 +40,18 @@ class PdfInfoTest {
         assertEquals(pdfInfo.createdAt, createdAt)
         assertEquals(pdfInfo.isReadOnly, true)
         assertEquals(pdfInfo.state, PdfState.SAVED)
+        assertEquals(pdfInfo.name, "Pdf test")
     }
 
     @Test
     fun shouldUpdatePdfInfoStateToSaved() {
-        val createdAt = LocalDate.now()
-        val pdfInfoID = UUID.randomUUID().toString()
-
         val pdfInfo = PdfInfo(
-            id = pdfInfoID,
             content = "Conteudo teste",
-            createdAt = createdAt,
             isReadOnly = true,
-            state = PdfState.NOT_SAVED,
+            name = "Pdf test"
         )
 
         pdfInfo.updateToSaved()
-
-        assertEquals(pdfInfo.id, pdfInfoID)
-        assertEquals(pdfInfo.content, "Conteudo teste")
-        assertEquals(pdfInfo.createdAt, createdAt)
-        assertEquals(pdfInfo.isReadOnly, true)
         assertEquals(pdfInfo.state, PdfState.SAVED)
     }
 }
