@@ -8,13 +8,13 @@ plugins {
 }
 
 android {
-    namespace = "com.fernando.editordepdf"
+    namespace = "com.fernando.fnotescreator"
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId = "com.fernando.editordepdf"
+        applicationId = "com.fernando.fnotescreator"
         minSdk = 26
         targetSdk = 36
         versionCode = 1

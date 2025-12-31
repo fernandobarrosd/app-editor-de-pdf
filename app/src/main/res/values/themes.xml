@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.EditorDePDF" parent="android:Theme.Material.NoActionBar">
+    <style name="Theme.FNotesCreatorApplication" parent="android:Theme.Material.NoActionBar">
         <item name="android:statusBarColor">@color/red_400</item>
         <item name="android:navigationBarColor">@color/red_400</item>
     </style>

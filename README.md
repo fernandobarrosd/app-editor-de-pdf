@@ -1,11 +1,9 @@
-# App de Edição de PDF
+# FNotes Creator (App de criação de notas)
 
 ## Recursos funcionais
 
-- Criar um texto e salvar ele em PDF
-- Poder visualizar os PDFs.
-- Poder importar os PDFs de fora do App
-- Poder deletar os PDFs.
-- Poder editar os PDFs salvos e não salvos.
-- Poder marcar os PDFs como read-only.
-- Poder filtrar os PDFs pela data.
+- Criar uma nota
+- Poder visualizar as notas.
+- Poder deletar as notas.
+- Poder editar as notas.
+- Poder marcar as notas como read-only.
