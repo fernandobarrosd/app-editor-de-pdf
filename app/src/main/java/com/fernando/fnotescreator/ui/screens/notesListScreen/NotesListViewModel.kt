@@ -44,8 +44,9 @@ class NotesListViewModel @Inject constructor(private val noteRepository: NoteRep
         viewModelScope.launch {
             _selectedNote.value?.let { selectedNote ->
                 noteRepository.deleteNoteById(selectedNote.id)
+
                 _notes.value?.let { notes ->
-                    val filteredNotes = _initialNotes.filter{ note -> note.id != selectedNote.id }
+                    val filteredNotes = notes.filter{ note -> note.id != selectedNote.id }
                     _notes.postValue(filteredNotes)
                 }
                 _isShowDeleteAlert.postValue(false)

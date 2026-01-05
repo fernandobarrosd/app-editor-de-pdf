@@ -20,6 +20,10 @@ class AddNoteViewModel @Inject constructor(private val noteRepository: NoteRepos
     val isSaved : LiveData<Boolean>
         get() = _isSaved
 
+    private val _errorMessage: MutableLiveData<String?> = MutableLiveData()
+    val errorMessage: LiveData<String?>
+        get() = _errorMessage
+
 
     fun showNoteNameInputDialog() {
         _isShowNoteNameInputDialog.postValue(true)
@@ -31,6 +35,11 @@ class AddNoteViewModel @Inject constructor(private val noteRepository: NoteRepos
 
     fun saveNote(saveNoteDTO: SaveNoteDTO) {
         viewModelScope.launch {
+            if (saveNoteDTO.name.isEmpty()) {
+                _errorMessage.postValue("O nome da nota não pode ser vazio")
+                return@launch
+            }
+            _errorMessage.postValue(null)
             noteRepository.saveNote(saveNoteDTO.toEntity())
             _isShowNoteNameInputDialog.postValue(false)
             _isSaved.postValue(true)

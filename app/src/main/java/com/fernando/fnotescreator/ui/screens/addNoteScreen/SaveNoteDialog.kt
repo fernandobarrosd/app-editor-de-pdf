@@ -5,6 +5,8 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
@@ -18,6 +20,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -41,7 +44,8 @@ fun SaveNoteDialog(
     AlertDialog(
         properties = DialogProperties(
             dismissOnClickOutside = false,
-            dismissOnBackPress = false
+            dismissOnBackPress = false,
+            usePlatformDefaultWidth = false
         ),
         title = {
             Text(
@@ -60,8 +64,7 @@ fun SaveNoteDialog(
                 },
                 singleLine = true,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .horizontalScroll(rememberScrollState()),
+                    .fillMaxWidth(),
                 textStyle = TextStyle(
                     color = Color.Black,
                     fontSize = 14.sp,
@@ -112,7 +115,8 @@ fun SaveNoteDialog(
             }
         },
         modifier = Modifier
-            .fillMaxWidth(),
+            .wrapContentSize(Alignment.Center)
+            .padding(horizontal = 16.dp),
         shape = RoundedCornerShape(8.dp)
     )
 }

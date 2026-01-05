@@ -11,11 +11,14 @@ interface NoteDAO {
     suspend fun save(noteEntity: NoteEntity)
 
     @Query("SELECT * FROM notes WHERE id = :noteID")
-    fun findById(noteID: String) : NoteEntity?
+    suspend fun findById(noteID: String) : NoteEntity?
 
     @Query("SELECT * FROM notes")
     suspend fun findAll() : List<NoteEntity>
 
     @Query("DELETE FROM notes WHERE id = :noteID")
     suspend fun deleteById(noteID: String)
+
+    @Query("UPDATE notes SET content = :newContent WHERE id = :noteID")
+    suspend fun updateNoteContent(newContent: String, noteID: String)
 }

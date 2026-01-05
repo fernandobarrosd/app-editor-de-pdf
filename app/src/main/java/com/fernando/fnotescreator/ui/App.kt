@@ -8,8 +8,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.fernando.fnotescreator.ui.screens.addNoteScreen.AddNoteRoute
 import com.fernando.fnotescreator.ui.screens.addNoteScreen.AddNoteScreen
+import com.fernando.fnotescreator.ui.screens.noteInfoScreen.NoteInfoRoute
+import com.fernando.fnotescreator.ui.screens.noteInfoScreen.NoteInfoScreen
 import com.fernando.fnotescreator.ui.screens.notesListScreen.NotesListRoute
 import com.fernando.fnotescreator.ui.screens.notesListScreen.NotesListScreen
 import com.fernando.fnotescreator.ui.theme.FNotesCreatorTheme
@@ -27,7 +30,7 @@ fun App() {
         composable<NotesListRoute> {
             NotesListScreen(
                 onNavigateToNoteInfoScreen = { noteID ->
-
+                    navController.navigate(NoteInfoRoute(noteID))
                 },
                 onNavigateToAddNoteScreen = {
                     navController.navigate(AddNoteRoute)
@@ -41,6 +44,18 @@ fun App() {
                         popUpTo(AddNoteRoute) { inclusive = true }
                         launchSingleTop = true
                     }
+                },
+                onBackStack = {
+                    navController.popBackStack()
+                }
+            )
+        }
+        composable<NoteInfoRoute> { backStackEntry ->
+            val noteInfoRoute = backStackEntry.toRoute<NoteInfoRoute>()
+            NoteInfoScreen(
+                noteID = noteInfoRoute.noteID,
+                onBackStack = {
+                    navController.popBackStack()
                 }
             )
         }

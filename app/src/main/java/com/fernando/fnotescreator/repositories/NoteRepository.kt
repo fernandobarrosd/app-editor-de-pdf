@@ -17,8 +17,12 @@ class NoteRepository @Inject constructor(private val noteDAO: NoteDAO) {
             .map { noteEntity -> noteEntity.toEntity() }
     }
 
-    fun findNoteById(noteID: String) : Note? {
+    suspend fun findNoteById(noteID: String) : Note? {
         return noteDAO.findById(noteID)?.toEntity()
+    }
+
+    suspend fun updateNoteContentById(newContent: String, noteID: String) {
+        noteDAO.updateNoteContent(newContent, noteID)
     }
 
     suspend fun deleteNoteById(noteID: String) {

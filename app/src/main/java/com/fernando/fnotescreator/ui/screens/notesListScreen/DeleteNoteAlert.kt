@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
@@ -11,6 +13,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -59,7 +62,8 @@ fun DeleteNoteAlert(
     AlertDialog(
         properties = DialogProperties(
             dismissOnBackPress = false,
-            dismissOnClickOutside = false
+            dismissOnClickOutside = false,
+            usePlatformDefaultWidth = false
         ),
         containerColor = Color.White,
         onDismissRequest = {},
@@ -98,7 +102,9 @@ fun DeleteNoteAlert(
                 color = Color.Black
             )
         },
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .wrapContentSize(Alignment.Center)
+            .padding(horizontal = 16.dp),
         shape = RoundedCornerShape(8.dp)
     )
 }

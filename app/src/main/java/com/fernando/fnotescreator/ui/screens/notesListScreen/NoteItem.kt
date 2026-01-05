@@ -1,7 +1,7 @@
 package com.fernando.fnotescreator.ui.screens.notesListScreen
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,7 +12,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Card
+import androidx.compose.material3.FilledIconButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -25,6 +30,7 @@ import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.fernando.fnotescreator.models.Note
+import com.fernando.fnotescreator.ui.theme.Red400
 import com.fernando.fnotescreator.ui.theme.poppinsFontFamily
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -43,14 +49,10 @@ fun NoteItem(
     Card(
         shape = RoundedCornerShape(10.dp),
         modifier = Modifier
-            .combinedClickable(
-                onClick = {
-                    onSelectItem()
-                },
-                onLongClick = {
-                    onDeleteItem()
-                }
-            )
+            .clickable {
+                onSelectItem()
+            }
+
     ) {
         Column(
             modifier = Modifier
@@ -60,7 +62,8 @@ fun NoteItem(
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
                     text = note.name,
@@ -69,8 +72,23 @@ fun NoteItem(
                     color = Color.Black,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.width(320.dp)
+                    modifier = Modifier.width(200.dp)
                 )
+                FilledIconButton(
+                    colors = IconButtonDefaults.iconButtonColors(
+                        containerColor = Red400
+                    ),
+                    shape = RoundedCornerShape(8.dp),
+                    onClick = {
+                        onDeleteItem()
+                    }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Delete,
+                        contentDescription = "Delete icon",
+                        tint = Color.White
+                    )
+                }
 
             }
             Spacer(Modifier.size(10.dp))

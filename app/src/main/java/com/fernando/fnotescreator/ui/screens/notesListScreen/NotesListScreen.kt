@@ -31,17 +31,6 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.fernando.fnotescreator.ui.theme.FNotesCreatorTheme
 import com.fernando.fnotescreator.ui.theme.Red500
 
-/*val pdfsList = List(10) { index ->
-    PdfInfo(
-        id = UUID.randomUUID().toString(),
-        content = "Conteudo teste ${index + 1}",
-        createdAt = LocalDate.now(),
-        isReadOnly = true,
-        state = PdfState.NOT_SAVED,
-        name = "name teste"
-    )
-}*/
-
 @Composable
 fun NotesListScreen(
     onNavigateToNoteInfoScreen: (noteID: String) -> Unit,

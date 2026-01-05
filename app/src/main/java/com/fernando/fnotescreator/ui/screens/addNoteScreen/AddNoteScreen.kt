@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -39,13 +41,15 @@ import com.fernando.fnotescreator.ui.theme.poppinsFontFamily
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddNoteScreen(onBackToNotesListScreen: () -> Unit) {
+fun AddNoteScreen(
+    onBackToNotesListScreen: () -> Unit,
+    onBackStack: () -> Unit) {
     val addNoteViewModel = hiltViewModel<AddNoteViewModel>()
     val isShowNoteNameInputDialog by addNoteViewModel.isShowNoteNameInputDialog
         .observeAsState(false)
     val isSaved by addNoteViewModel.isSaved.observeAsState(false)
     var isReadOnly by remember { mutableStateOf(false) }
-    var noteContent by remember { mutableStateOf(LoremIpsum().values.joinToString(" ")) }
+    var noteContent by remember { mutableStateOf("") }
 
     if (isSaved) {
         onBackToNotesListScreen()
@@ -62,6 +66,18 @@ fun AddNoteScreen(onBackToNotesListScreen: () -> Unit) {
                         fontWeight = FontWeight.Medium
                     )
                 },
+                navigationIcon = {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Default.ArrowBack,
+                        contentDescription = "Navigation icon",
+                        tint = Color.White,
+                        modifier = Modifier
+                            .padding(start = 10.dp, end = 18.dp)
+                            .clickable {
+                                onBackStack()
+                            }
+                    )
+                },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = Color.Transparent
                 ),
@@ -69,6 +85,7 @@ fun AddNoteScreen(onBackToNotesListScreen: () -> Unit) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier
+                            .padding(end = 24.dp)
                             .clickable {
                                 addNoteViewModel.showNoteNameInputDialog()
                             }
@@ -149,6 +166,9 @@ fun AddNoteScreen(onBackToNotesListScreen: () -> Unit) {
 @Composable
 private fun AddPdfScreenPreview() {
     FNotesCreatorTheme {
-        AddNoteScreen {}
+        AddNoteScreen(
+            onBackToNotesListScreen = {},
+            onBackStack = {}
+        )
     }
 }
