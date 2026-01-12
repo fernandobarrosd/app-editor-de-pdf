@@ -14,6 +14,7 @@ navVersion = "2.9.6"
 runtimeLiveDataVersion = "1.10.0"
 hiltVersion = "2.57.2"
 hiltNavigationCompose = "1.3.0"
+splashScreenVersion = "1.2.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -38,6 +39,7 @@ androidx-compose-runtime-livedata = { group = "androidx.compose.runtime", name =
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltVersion" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hiltVersion" }
 hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashScreenVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

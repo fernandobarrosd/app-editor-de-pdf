@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -7,10 +9,22 @@ plugins {
     alias(libs.plugins.hilt)
 }
 
+val properties = Properties()
+properties.load(project.rootProject.file("local.properties").reader())
+
 android {
     namespace = "com.fernando.fnotescreator"
     compileSdk {
         version = release(36)
+    }
+
+    signingConfigs {
+        create("release") {
+            storeFile = file(properties["key-store.path"] as String)
+            storePassword = properties["key-store.password"] as String
+            keyAlias = properties["key-store.alias"] as String
+            keyPassword = properties["key-store.alias.password"] as String
+        }
     }
 
     defaultConfig {
@@ -21,19 +35,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        buildConfigField("Boolean", "IS_DEV", "true")
+        signingConfig = signingConfigs.getByName("release")
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -44,6 +48,19 @@ android {
     buildFeatures {
         compose = true
         buildConfig = true
+    }
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            buildConfigField("Boolean", "IS_DEV", "false")
+        }
+        debug {
+            buildConfigField("Boolean", "IS_DEV", "true")
+        }
     }
 }
 
@@ -63,6 +80,9 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
     ksp(libs.hilt.compiler)
+
+    // Splash Screen
+    implementation(libs.androidx.core.splashscreen)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
