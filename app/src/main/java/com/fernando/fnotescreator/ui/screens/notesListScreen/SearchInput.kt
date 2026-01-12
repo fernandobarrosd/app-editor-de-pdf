@@ -24,6 +24,7 @@ import com.fernando.fnotescreator.ui.theme.poppinsFontFamily
 @Composable
 fun SearchInput(
     value: String,
+    isEnabled : Boolean,
     modifier: Modifier = Modifier,
     onValueChange: (newValue: String) -> Unit
 ) {
@@ -36,23 +37,25 @@ fun SearchInput(
             focusedContainerColor = Color.White,
             unfocusedContainerColor = Color.White,
             focusedIndicatorColor = Red500,
-            unfocusedIndicatorColor = Color.Transparent
+            unfocusedIndicatorColor = Color.Transparent,
+            disabledContainerColor = Color.White
         ),
+        enabled = isEnabled,
 
         singleLine = true,
         textStyle = TextStyle(
             color = Color.Black,
             fontFamily = poppinsFontFamily,
             fontWeight = FontWeight.Medium,
-            fontSize = 15.sp
+            fontSize = 14.sp
         ),
         placeholder = {
             Text(
-                text = "Buscar PDF",
+                text = "Buscar notas",
                 fontFamily = poppinsFontFamily,
                 fontWeight = FontWeight.Medium,
                 color = Color.Black,
-                fontSize = 15.sp
+                fontSize = 14.sp
             )
         },
         shape = RoundedCornerShape(50.dp),
@@ -66,11 +69,11 @@ fun SearchInput(
 @Preview
 @Composable
 private fun SearchInputPreviewWithEmptyValue() {
-    SearchInput(value = "") {}
+    SearchInput(value = "", isEnabled = true) {}
 }
 
 @Preview
 @Composable
 private fun SearchInputPreviewWithNotEmptyValue() {
-    SearchInput(value = "value") {}
+    SearchInput(value = "value", isEnabled = true) {}
 }

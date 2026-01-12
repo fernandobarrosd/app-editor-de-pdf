@@ -5,7 +5,7 @@ import com.fernando.fnotescreator.room.entities.NoteEntity
 import com.fernando.fnotescreator.ui.screens.addNoteScreen.SaveNoteDTO
 
 fun SaveNoteDTO.toEntity() : Note {
-    return Note(name = name, content = content, isReadOnly = isReadOnly)
+    return Note(name = name, content = content)
 }
 
 fun Note.toRoomEntity() : NoteEntity {
@@ -13,7 +13,6 @@ fun Note.toRoomEntity() : NoteEntity {
         id = id,
         content = content,
         createdAt = createdAt,
-        isReadOnly = isReadOnly,
         name = name
     )
 }
@@ -23,7 +22,6 @@ fun NoteEntity.toEntity() : Note {
         id = id,
         content = content,
         createdAt = createdAt,
-        isReadOnly = isReadOnly,
         name = name
     )
 }

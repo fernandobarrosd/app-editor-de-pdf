@@ -10,12 +10,10 @@ class PdfInfoTest {
     fun shouldCreateNoteWithoutId() {
         val note = Note(
             content = "Conteudo teste",
-            isReadOnly = true,
             name = "Note test"
         )
 
         assertEquals(note.content, "Conteudo teste")
-        assertEquals(note.isReadOnly, true)
         assertEquals(note.name, "Note test")
     }
 
@@ -28,14 +26,12 @@ class PdfInfoTest {
             id = pdfInfoID,
             content = "Conteudo teste",
             createdAt = createdAt,
-            isReadOnly = true,
             name = "Note test"
         )
 
         assertEquals(note.id, pdfInfoID)
         assertEquals(note.content, "Conteudo teste")
         assertEquals(note.createdAt, createdAt)
-        assertEquals(note.isReadOnly, true)
         assertEquals(note.name, "Note test")
     }
 }

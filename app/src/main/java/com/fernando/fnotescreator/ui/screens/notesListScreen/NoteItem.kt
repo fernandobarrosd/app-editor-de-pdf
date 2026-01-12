@@ -58,7 +58,7 @@ fun NoteItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Color.White)
-                .padding(start = 16.dp, end = 16.dp, top = 10.dp, bottom = 10.dp)
+                .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 8.dp)
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -69,6 +69,7 @@ fun NoteItem(
                     text = note.name,
                     fontFamily = poppinsFontFamily,
                     fontWeight = FontWeight.W400,
+                    fontSize = 14.sp,
                     color = Color.Black,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
@@ -121,7 +122,6 @@ private fun NoteItemPreview() {
             id = UUID.randomUUID().toString(),
             content = "Conteudo teste 1",
             createdAt = LocalDate.now(),
-            isReadOnly = true,
             name = LoremIpsum().values.joinToString(" ")
         ),
         onDeleteItem = {},

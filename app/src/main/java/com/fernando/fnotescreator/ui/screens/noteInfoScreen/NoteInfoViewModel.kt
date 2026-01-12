@@ -10,26 +10,12 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.launch
 
+
 @HiltViewModel
 class NoteInfoViewModel @Inject constructor(private val noteRepository: NoteRepository) : ViewModel() {
     private val _note: MutableLiveData<Note> = MutableLiveData()
     val note: LiveData<Note>
         get() = _note
-
-
-    private val _isUpdated: MutableLiveData<Boolean> = MutableLiveData()
-    val isUpdated: LiveData<Boolean>
-        get() = _isUpdated
-
-
-    fun updateNote(newContent: String) {
-        viewModelScope.launch {
-            _note.value?.let { note ->
-                noteRepository.updateNoteContentById(newContent, note.id)
-                _isUpdated.postValue(true)
-            }
-        }
-    }
 
 
     fun getNote(noteID: String) {

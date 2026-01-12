@@ -4,7 +4,7 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-12-30T12:14:09.663443800Z">
+        <DropdownSelection timestamp="2026-01-11T22:51:03.766791900Z">
           <Target type="DEFAULT_BOOT">
             <handle>
               <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\fdeba\.android\avd\Pixel_8_Pro.avd" />
@@ -12,12 +12,6 @@
           </Target>
         </DropdownSelection>
         <DialogSelection />
-      </SelectionState>
-      <SelectionState runConfigName="shouldReturnPdfInfoUpdatedWhenCallUpdateToSavedMethod()">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="shouldReturnNullIfPdfIsNotExistsWhenCallUpdateToSavedMethod()">
-        <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
       <SelectionState runConfigName="shouldDeletePdfWhenCallDeletePdfInfoByIdMethod()">
         <option name="selectionMode" value="DROPDOWN" />
@@ -27,6 +21,17 @@
       </SelectionState>
       <SelectionState runConfigName="shouldSavePdfInfo()">
         <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="SaveNoteDialogPreview">
+        <option name="selectionMode" value="DROPDOWN" />
+        <DropdownSelection timestamp="2026-01-11T22:50:58.245174100Z">
+          <Target type="DEFAULT_BOOT">
+            <handle>
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\fdeba\.android\avd\Pixel_8_Pro.avd" />
+            </handle>
+          </Target>
+        </DropdownSelection>
+        <DialogSelection />
       </SelectionState>
     </selectionStates>
   </component>

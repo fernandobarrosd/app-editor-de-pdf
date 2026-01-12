@@ -37,6 +37,7 @@ class AddNoteViewModel @Inject constructor(private val noteRepository: NoteRepos
         viewModelScope.launch {
             if (saveNoteDTO.name.isEmpty()) {
                 _errorMessage.postValue("O nome da nota não pode ser vazio")
+                _isShowNoteNameInputDialog.postValue(true)
                 return@launch
             }
             _errorMessage.postValue(null)

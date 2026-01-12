@@ -20,6 +20,10 @@ class NotesListViewModel @Inject constructor(private val noteRepository: NoteRep
     val isLoading: LiveData<Boolean>
         get() = _isLoading
 
+    private val _isSearched: MutableLiveData<Boolean> = MutableLiveData()
+    val isSearched: LiveData<Boolean>
+        get() = _isSearched
+
     private val _isShowDeleteAlert: MutableLiveData<Boolean> = MutableLiveData()
     val isShowDeleteAlert: LiveData<Boolean>
         get() = _isShowDeleteAlert
@@ -31,12 +35,12 @@ class NotesListViewModel @Inject constructor(private val noteRepository: NoteRep
     private var _initialNotes = emptyList<Note>()
 
     fun getAllNotes() {
+        _isLoading.postValue(true)
         viewModelScope.launch {
-            _isLoading.postValue(true)
             val allNotes = noteRepository.findAllNotes()
+            _isLoading.postValue(false)
             _notes.postValue(allNotes)
             _initialNotes = allNotes
-            _isLoading.postValue(true)
         }
     }
 
@@ -55,6 +59,7 @@ class NotesListViewModel @Inject constructor(private val noteRepository: NoteRep
     }
 
     fun filterNotesByName(noteName: String) {
+        _isSearched.postValue(true)
         _notes.value?.let { notes ->
             val filteredNotesByName = _initialNotes
                 .filter { pdfInfo -> pdfInfo.name.contains(noteName) }
@@ -62,7 +67,6 @@ class NotesListViewModel @Inject constructor(private val noteRepository: NoteRep
             _notes.postValue(filteredNotesByName)
         }
     }
-
     fun showDeleteAlert(note: Note) {
         _isShowDeleteAlert.postValue(true)
         _selectedNote.postValue(note)

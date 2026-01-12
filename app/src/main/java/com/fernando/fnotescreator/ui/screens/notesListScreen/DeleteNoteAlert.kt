@@ -17,41 +17,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
 import com.fernando.fnotescreator.models.Note
+import com.fernando.fnotescreator.ui.components.AlertButton
 import com.fernando.fnotescreator.ui.theme.FNotesCreatorTheme
 import com.fernando.fnotescreator.ui.theme.Green500
 import com.fernando.fnotescreator.ui.theme.Red500
 import com.fernando.fnotescreator.ui.theme.poppinsFontFamily
 import java.time.LocalDate
 import java.util.UUID
-
-@Composable
-fun DeleteButton(
-    text: String,
-    color: Color,
-    onClick: () -> Unit
-) {
-    Button(
-        onClick = onClick,
-        shape = RoundedCornerShape(8.dp),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = color
-        )
-    ) {
-        Text(
-            text = text,
-            fontFamily = poppinsFontFamily,
-            fontWeight = FontWeight.W400,
-            fontSize = 16.sp,
-            color = Color.White
-        )
-    }
-}
 
 @Composable
 fun DeleteNoteAlert(
@@ -68,7 +47,7 @@ fun DeleteNoteAlert(
         containerColor = Color.White,
         onDismissRequest = {},
         confirmButton = {
-            DeleteButton(
+            AlertButton(
                 text = "Sim",
                 color = Green500,
                 onClick = {
@@ -77,7 +56,7 @@ fun DeleteNoteAlert(
             )
         },
         dismissButton = {
-            DeleteButton(
+            AlertButton(
                 text = "Não",
                 color = Red500,
                 onClick = {
@@ -87,11 +66,13 @@ fun DeleteNoteAlert(
         },
         title = {
             Text(
-                text = "Deletar pdf ${note.name}?",
+                text = "Deletar pdf \"${note.name}\"?",
                 fontFamily = poppinsFontFamily,
                 fontWeight = FontWeight.Medium,
-                fontSize = 16.sp,
-                color = Color.Black
+                fontSize = 14.sp,
+                color = Color.Black,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
             )
         },
         text = {
@@ -123,8 +104,7 @@ private fun DeletePdfInfoAlertPreview() {
                         id = UUID.randomUUID().toString(),
                         content = LoremIpsum().values.joinToString(" "),
                         createdAt = LocalDate.now(),
-                        isReadOnly = true,
-                        name = "\"Pdf 1\""
+                        name = "Nota teste"
                     )
                 )
             }

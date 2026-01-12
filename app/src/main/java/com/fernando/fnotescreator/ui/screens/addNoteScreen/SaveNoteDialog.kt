@@ -1,17 +1,15 @@
 package com.fernando.fnotescreator.ui.screens.addNoteScreen
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -29,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
+import com.fernando.fnotescreator.ui.components.AlertButton
 import com.fernando.fnotescreator.ui.theme.FNotesCreatorTheme
 import com.fernando.fnotescreator.ui.theme.Green500
 import com.fernando.fnotescreator.ui.theme.Red500
@@ -38,6 +37,7 @@ import com.fernando.fnotescreator.ui.theme.poppinsFontFamily
 fun SaveNoteDialog(
     onSaveNote: (noteName: String) -> Unit,
     onCancelSaveNote: () -> Unit,
+    errorMessage: String?
 ) {
     var noteName by remember { mutableStateOf("") }
 
@@ -51,68 +51,60 @@ fun SaveNoteDialog(
             Text(
                 text = "Salvar nota",
                 color = Color.Black,
-                fontSize = 16.sp,
+                fontSize = 14.sp,
                 fontFamily = poppinsFontFamily,
                 fontWeight = FontWeight.Medium
             )
         },
         text = {
-            OutlinedTextField(
-                value = noteName,
-                onValueChange = { newValue ->
-                    noteName = newValue
-                },
-                singleLine = true,
-                modifier = Modifier
-                    .fillMaxWidth(),
-                textStyle = TextStyle(
-                    color = Color.Black,
-                    fontSize = 14.sp,
-                    fontFamily = poppinsFontFamily,
-                    fontWeight = FontWeight.Medium
+            Column {
+                OutlinedTextField(
+                    value = noteName,
+                    onValueChange = { newValue ->
+                        noteName = newValue
+                    },
+                    singleLine = true,
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    textStyle = TextStyle(
+                        color = Color.Black,
+                        fontSize = 14.sp,
+                        fontFamily = poppinsFontFamily,
+                        fontWeight = FontWeight.Medium
+                    )
                 )
+                if (errorMessage != null) {
+                    Spacer(Modifier.size(10.dp))
+                    Text(
+                        text = errorMessage,
+                        color = Red500,
+                        fontSize = 14.sp,
+                        fontFamily = poppinsFontFamily,
+                        fontWeight = FontWeight.Medium,
 
-            )
+                    )
+                }
+            }
         },
         containerColor = Color.White,
         onDismissRequest = {},
         confirmButton = {
-            Button(
+            AlertButton(
+                text = "Salvar",
+                color = Green500,
                 onClick = {
                     onSaveNote(noteName)
-                },
-                shape = RoundedCornerShape(8.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Green500
-                )
-            ) {
-                Text(
-                    text = "Salvar",
-                    fontFamily = poppinsFontFamily,
-                    fontWeight = FontWeight.W400,
-                    fontSize = 16.sp,
-                    color = Color.White
-                )
-            }
+                }
+            )
         },
         dismissButton = {
-            Button(
+            AlertButton(
+                text = "Cancelar",
+                color = Red500,
                 onClick = {
                     onCancelSaveNote()
-                },
-                shape = RoundedCornerShape(8.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Red500
-                )
-            ) {
-                Text(
-                    text = "Cancelar",
-                    fontFamily = poppinsFontFamily,
-                    fontWeight = FontWeight.W400,
-                    fontSize = 16.sp,
-                    color = Color.White
-                )
-            }
+                }
+            )
         },
         modifier = Modifier
             .wrapContentSize(Alignment.Center)
@@ -131,6 +123,7 @@ private fun SaveNoteDialogPreview() {
                 SaveNoteDialog (
                     onSaveNote = {},
                     onCancelSaveNote = {},
+                    errorMessage = "O nome da nota não pode ser vazio"
                 )
             }
         }

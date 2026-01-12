@@ -41,7 +41,6 @@ class NoteRepositoryTest {
         runTest {
             val note = Note(
                 content = "Conteudo teste",
-                isReadOnly = true,
                 name = "Note test"
             )
             val noteSaved = noteRepository.saveNote(note)
@@ -49,7 +48,6 @@ class NoteRepositoryTest {
             assertEquals(noteSaved.id, note.id)
             assertEquals(noteSaved.content, note.content)
             assertEquals(noteSaved.createdAt, note.createdAt)
-            assertEquals(noteSaved.isReadOnly, note.isReadOnly)
         }
     }
 
@@ -58,7 +56,6 @@ class NoteRepositoryTest {
         runTest {
             val note = Note(
                 content = "Conteudo teste",
-                isReadOnly = true,
                 name = "Note test"
             )
 
@@ -69,7 +66,6 @@ class NoteRepositoryTest {
             assertEquals(noteFind?.id, note.id)
             assertEquals(noteFind?.content, note.content)
             assertEquals(noteFind?.createdAt, note.createdAt)
-            assertEquals(noteFind?.isReadOnly, note.isReadOnly)
         }
     }
 
@@ -88,17 +84,14 @@ class NoteRepositoryTest {
             val notes = listOf(
                 Note(
                     content = "Conteudo teste 1",
-                    isReadOnly = true,
                     name = "Note test"
                 ),
                 Note(
                     content = "Conteudo teste 2",
-                    isReadOnly = true,
                     name = "Note test"
                 ),
                 Note(
                     content = "Conteudo teste 3",
-                    isReadOnly = true,
                     name = "Note test"
                 )
             )
@@ -128,7 +121,6 @@ class NoteRepositoryTest {
         runTest {
             val note = Note(
                 content = "Conteudo teste 1",
-                isReadOnly = true,
                 name = "Note test"
             )
             noteRepository.saveNote(note)

@@ -14,8 +14,5 @@ data class NoteEntity(
     val name: String,
 
     @ColumnInfo(name = "created_at")
-    val createdAt: LocalDate,
-
-    @ColumnInfo(name = "is_read_only")
-    val isReadOnly: Boolean
+    val createdAt: LocalDate
 )

@@ -7,7 +7,7 @@ import com.fernando.fnotescreator.room.converters.LocalDateConverters
 import com.fernando.fnotescreator.room.daos.NoteDAO
 import com.fernando.fnotescreator.room.entities.NoteEntity
 
-@Database(entities = [NoteEntity::class], version = 1)
+@Database(entities = [NoteEntity::class], exportSchema = false, version = 1)
 @TypeConverters(LocalDateConverters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun noteDAO() : NoteDAO

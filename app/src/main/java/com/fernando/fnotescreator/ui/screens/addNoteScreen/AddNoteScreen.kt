@@ -7,17 +7,15 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Done
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -28,11 +26,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -48,8 +47,9 @@ fun AddNoteScreen(
     val isShowNoteNameInputDialog by addNoteViewModel.isShowNoteNameInputDialog
         .observeAsState(false)
     val isSaved by addNoteViewModel.isSaved.observeAsState(false)
-    var isReadOnly by remember { mutableStateOf(false) }
     var noteContent by remember { mutableStateOf("") }
+    val errorMessage by addNoteViewModel.errorMessage.observeAsState(null)
+    val focusRequester = remember { FocusRequester() }
 
     if (isSaved) {
         onBackToNotesListScreen()
@@ -62,8 +62,9 @@ fun AddNoteScreen(
                     Text(
                         text = "Editor",
                         color = Color.White,
+                        fontSize = 15.sp,
                         fontFamily = poppinsFontFamily,
-                        fontWeight = FontWeight.Medium
+                        fontWeight = FontWeight.W400
                     )
                 },
                 navigationIcon = {
@@ -93,7 +94,7 @@ fun AddNoteScreen(
                         Text(
                             text = "Salvar",
                             color = Color.White,
-                            fontSize = 16.sp,
+                            fontSize = 15.sp,
                             fontFamily = poppinsFontFamily,
                             fontWeight = FontWeight.Medium
                         )
@@ -111,13 +112,13 @@ fun AddNoteScreen(
         if (isShowNoteNameInputDialog) {
             SaveNoteDialog(
                 onSaveNote = { noteName ->
-
-                    val noteDTO = SaveNoteDTO(noteName, noteContent, isReadOnly)
+                    val noteDTO = SaveNoteDTO(noteName, noteContent)
                     addNoteViewModel.saveNote(noteDTO)
                 },
                 onCancelSaveNote = {
                     addNoteViewModel.hideNoteNameInputDialog()
-                }
+                },
+                errorMessage = errorMessage
             )
         }
         Column(
@@ -125,38 +126,26 @@ fun AddNoteScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(start = 16.dp)
-            ) {
-                Text(
-                    text = "Somente leitura",
-                    fontFamily = poppinsFontFamily,
-                    fontWeight = FontWeight.Medium,
-                    fontSize = 16.sp,
-                    color = Color.White
-                )
-                Checkbox(
-                    checked = isReadOnly,
-                    onCheckedChange = {
-                        isReadOnly = it
-                    }
-                )
-            }
-            TextField(
+            OutlinedTextField(
                 value = noteContent,
                 onValueChange = { newValue ->
                     noteContent = newValue
                 },
+                colors = TextFieldDefaults.colors(
+                    focusedContainerColor = Color.White,
+                    unfocusedContainerColor = Color.White,
+                    unfocusedIndicatorColor = Color.Transparent,
+                    focusedIndicatorColor = Color.Transparent
+                ),
                 textStyle = TextStyle(
                     color = Color.Black,
-                    fontSize = 16.sp,
+                    fontSize = 14.sp,
                     fontFamily = poppinsFontFamily,
-                    fontWeight = FontWeight.Medium
+                    fontWeight = FontWeight.W400
                 ),
-                shape = RoundedCornerShape(0.dp),
                 modifier = Modifier
                     .fillMaxSize()
+                    .focusRequester(focusRequester)
             )
         }
     }
